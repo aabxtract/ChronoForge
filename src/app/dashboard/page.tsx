@@ -1,4 +1,6 @@
+"use client";
 
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { ClockCard } from "@/app/components/clock-card";
 import { mockClocks } from "@/lib/mock-data";
 import { FileClock, History } from "lucide-react";
@@ -6,9 +8,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TxnHistory } from "./txn-history";
 
 export default function DashboardPage() {
-  // In a real app, you would fetch clocks owned by the connected user.
-  // Here, we'll just show a subset of mock clocks.
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const tab = searchParams.get('tab') || 'clocks';
+  
   const userClocks = mockClocks.slice(0, 4);
+
+  const handleTabChange = (value: string) => {
+    router.push(`${pathname}?tab=${value}`, { scroll: false });
+  };
 
   return (
     <div>
@@ -22,7 +31,7 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      <Tabs defaultValue="clocks">
+      <Tabs value={tab} onValueChange={handleTabChange}>
         <TabsList className="grid w-full grid-cols-2 max-w-md mb-6">
           <TabsTrigger value="clocks">
             <FileClock className="w-4 h-4 mr-2" />

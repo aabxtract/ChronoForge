@@ -24,6 +24,12 @@ export function AppHeader() {
             >
               My Clocks
             </Link>
+            <Link
+              href="/dashboard?tab=history"
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+            >
+              History
+            </Link>
           </nav>
         </div>
         <div className="flex flex-1 items-center justify-end">
