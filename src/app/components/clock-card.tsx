@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { ClockSVG } from "./clock-svg";
 import { getClockState, formatDuration } from "@/lib/time";
-import type { Clock, RarityInfo } from "@/lib/types";
+import type { Clock } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import Sparkles from "./sparkles";
 
@@ -34,11 +34,12 @@ export function ClockCard({ clock }: ClockCardProps) {
   const isLegendary = rarity.name === "Legendary";
 
   return (
-    <Link href={`/clocks/${clock.id}`}>
-      <Card
-        className="relative group w-full h-full overflow-hidden bg-card/50 backdrop-blur-lg border-border/20 hover:border-primary/50 transition-all duration-300 flex flex-col"
-        style={{ '--glow-color': rarity.glowColor } as React.CSSProperties}
-      >
+    <Card
+      asChild
+      className="relative group w-full h-full overflow-hidden bg-card/50 backdrop-blur-lg border-border/20 hover:border-primary/50 transition-all duration-300 flex flex-col"
+      style={{ '--glow-color': rarity.glowColor } as React.CSSProperties}
+    >
+      <Link href={`/clocks/${clock.id}`}>
         {isLegendary && !isEvolved && <Sparkles />}
         <CardHeader className="p-4 flex-shrink-0">
           <div className="flex justify-between items-center">
@@ -75,7 +76,7 @@ export function ClockCard({ clock }: ClockCardProps) {
             <p className="text-xs text-muted-foreground">Time Remaining</p>
           </div>
         </CardFooter>
-      </Card>
-    </Link>
+      </Link>
+    </Card>
   );
 }
