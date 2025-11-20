@@ -14,3 +14,11 @@ export type RarityInfo = {
   color: string;
   glowColor: string;
 };
+
+export type Transaction = {
+  id: string;
+  type: 'Mint' | 'Evolve';
+  clockId: string;
+  timestamp: number;
+  details: string;
+};

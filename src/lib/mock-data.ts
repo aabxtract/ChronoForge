@@ -1,4 +1,4 @@
-import type { Clock } from './types';
+import type { Clock, Transaction } from './types';
 
 const now = Date.now();
 
@@ -58,5 +58,36 @@ export const mockClocks: Clock[] = [
     startTime: now - 3600 * 1000 * 24 * 7,
     endTime: now + 3600 * 1000 * 24 * 7, // 14 days total, 7 days passed
     evolved: false,
+  },
+];
+
+export const mockTransactions: Transaction[] = [
+  {
+    id: '0x' + Array(64).fill(0).map(() => Math.floor(Math.random() * 16).toString(16)).join(''),
+    type: 'Mint',
+    clockId: '1',
+    timestamp: now - 10000,
+    details: 'Minted a Minimal clock with 1 hour duration.',
+  },
+  {
+    id: '0x' + Array(64).fill(0).map(() => Math.floor(Math.random() * 16).toString(16)).join(''),
+    type: 'Evolve',
+    clockId: '7',
+    timestamp: now - 1000,
+    details: 'Astral clock #7 has evolved into an Eternal timepiece.',
+  },
+    {
+    id: '0x' + Array(64).fill(0).map(() => Math.floor(Math.random() * 16).toString(16)).join(''),
+    type: 'Mint',
+    clockId: '2',
+    timestamp: now - 3600 * 1000 * 5,
+    details: 'Minted a Cyberpunk clock with 1 day duration.',
+  },
+  {
+    id: '0x' + Array(64).fill(0).map(() => Math.floor(Math.random() * 16).toString(16)).join(''),
+    type: 'Mint',
+    clockId: '3',
+    timestamp: now - 3600 * 1000 * 24 * 2,
+    details: 'Minted an Astral clock with 7 day duration.',
   },
 ];
